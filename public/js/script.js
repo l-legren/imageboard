@@ -4,18 +4,18 @@ new Vue({
     el: "#main",
     data: {
         name: "Jasmine",
-        cards: []
-
+        cards: [],
     },
-    mounted: function() {
+    mounted: function () {
         var self = this;
         axios
             .get("/images")
             .then(function (response) {
-                console.log("response: ", response);
+                // console.log("response: ", response);
                 // console.log("this inside then: ", self);
                 self.cards = response.data;
-            }).catch(function (error) {
+            })
+            .catch(function (error) {
                 console.log("error: ", error);
             });
     },
@@ -23,6 +23,36 @@ new Vue({
         carlosMethod: function (card) {
             console.log("Carlos' method: ", card);
             // this.name = card;
+        },
+    },
+});
+
+new Vue({
+    el: "#uploader",
+    data: {
+        title: "",
+        description: "",
+        username: "",
+        image: null
+    },
+    methods: {
+        handleFileChange: function(e) {
+            // console.log(e.target.files[0]);
+            this.image = e.target.files[0];
+        },
+        upload: function (e) {
+            e.preventDefault;
+
+            var formData = new FormData();
+
+            formData.append("title", this.title);
+            formData.append("description", this.description);
+            formData.append("username", this.username);
+            formData.append("image", this.image);
+
+            axios.post("/upload", FormData).then((res) => {
+                console.log(res);
+            });
         }
     }
 });
