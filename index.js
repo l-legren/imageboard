@@ -1,16 +1,17 @@
 const express = require("express");
-const { getImage } = require("./db");
+const { getImage, insertImage } = require("./db");
 const app = express();
 const { upload } = require("./s3.js");
 const multer = require("multer");
 const uidSafe = require("uid-safe");
 const path = require("path");
+const config = require("./config.json");
 
 const diskStorage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, __dirname + "/uploads");
     },
-    filename: function (re, file, callback) {
+    filename: function (req, file, callback) {
         uidSafe(24).then(function(uid) {
             callback(null, `${uid}${path.extname(file.originalname)}`);
         });
@@ -35,15 +36,21 @@ app.get("/images", (req, res) => {
 });
 
 app.post("/upload", uploader.single("image"), upload, (req, res) => {
+    console.log("req.file: ", req.file);
+    const { title, description, username } = req.body;
+    const { filename } = req.file;
+    const fullUrl = `${config.s3Url}${filename}`;
     if (req.file) {
         // Have to send here the new Object
-        res.json({
-            succes: true
-        });
+        insertImage(fullUrl, username, title, description).then(() => {
+            // console.log("Inserted to images Table, result: ", result);
+            res.redirect("/");
+        }).catch((err) => console.log(err));
     } else {
         res.json({
             succes: false
         });
+        res.sendStatus(404);
     }
 });
 

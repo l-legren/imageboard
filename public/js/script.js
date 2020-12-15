@@ -19,12 +19,7 @@ new Vue({
                 console.log("error: ", error);
             });
     },
-    methods: {
-        carlosMethod: function (card) {
-            console.log("Carlos' method: ", card);
-            // this.name = card;
-        },
-    },
+    methods: null
 });
 
 new Vue({

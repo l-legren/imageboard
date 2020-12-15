@@ -8,7 +8,7 @@
     <body>
         <div class="navigation-bar">
             <img src="" alt="Icon of nav-bar" />
-            <h2></h2>
+            <h2>PHOTOFY</h2>
         </div>
         <h2>Choose your image</h2>
         <div id="uploader">
@@ -26,10 +26,12 @@
                 <input type="submit" value="Upload!" @click="upload">
             </form>
         </div>
-        <div id="main">
-            <div v-for="card in cards" class="card">
-                <img :src="card.url" alt="Image in grid" />
-                <p class="quote">{{ card.description }}</p>
+        <div class="container">
+            <div id="main">
+                <div v-for="card in cards" class="card">
+                    <img :src="card.url" alt="Image in grid" />
+                    <p class="quote">{{ card.description }}</p>
+                </div>
             </div>
         </div>
         <script src="/js/vue.js"></script>
