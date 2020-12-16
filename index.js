@@ -1,5 +1,5 @@
 const express = require("express");
-const { getImage, insertImage } = require("./db");
+const { getImage, getImageWithId, insertImage } = require("./db");
 const app = express();
 const { upload } = require("./s3.js");
 const multer = require("multer");
@@ -27,10 +27,18 @@ const uploader = multer({
 
 app.use(express.static("public"));
 
-
 app.get("/images", (req, res) => {
     // We don't use render for this project
     getImage().then(({ rows }) => {
+        res.json(rows);
+    }).catch((err) => console.log(err));
+});
+
+app.get("/image-selected/:imageurl", (req, res) => {
+    const { imageurl } = req.params;
+    // console.log(req.params.imageurl);
+    getImageWithId(imageurl).then(({ rows }) => {
+        // console.log(rows);
         res.json(rows);
     }).catch((err) => console.log(err));
 });

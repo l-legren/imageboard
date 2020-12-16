@@ -13,6 +13,15 @@ module.exports.getImage = () => {
     return db.query(q);
 };
 
+exports.getImageWithId = (id) => {
+    const q = `SELECT *
+    FROM images
+    WHERE id=($1)`;
+    const params = [id];
+
+    return db.query(q, params);
+};
+
 // INSERTING
 
 exports.insertImage = (url, username, title, description) => {

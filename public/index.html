@@ -14,30 +14,47 @@
         <div id="uploader">
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <!-- need two ways BINDING HERE with v-model!!! v-bind only one way! -->
-                <input name="title" type="text" placeholder="Title" v-model="title">
-                <input name="description" type="text" placeholder="Description" v-model="description">
-                <input name="username" type="text" placeholder="User Name" v-model="username">
+                <input
+                    name="title"
+                    type="text"
+                    placeholder="Title"
+                    v-model="title"
+                />
+                <input
+                    name="description"
+                    type="text"
+                    placeholder="Description"
+                    v-model="description"
+                />
+                <input
+                    name="username"
+                    type="text"
+                    placeholder="User Name"
+                    v-model="username"
+                />
                 <!-- v-model doesn't work here, I need event handler on change -->
-                <input 
-                    type="file" 
-                    name="image" 
+                <input
+                    type="file"
+                    name="image"
                     accept="image/*"
-                    @change="handleFileChange">
-                <input type="submit" value="Upload!" @click="upload">
+                    @change="handleFileChange"
+                />
+                <input type="submit" value="Upload!" @click="upload" />
             </form>
         </div>
         <div class="container">
             <div id="main">
                 <div v-for="image in images" class="card">
-                    <img 
-                    :src="image.url" 
-                    alt="Image in grid"
-                    @click="showUp(image.id)" />
+                    <img
+                        :src="image.url"
+                        alt="Image in grid"
+                        @click="showUp(image.id)"
+                    />
                     <p class="quote">{{ image.description }}</p>
                 </div>
-                <my-component 
+                <my-component
                     v-if="idImage"
-                    v-bind:image-clicked="idImage"
+                    :id="idImage"
                     @close="closeMe"
                 ></my-component>
             </div>
@@ -45,8 +62,12 @@
 
         <!-- HERE THE CODE OF MY COMPONENT -->
         <script id="template" type="text/x-template">
-            <div class="component">
-                <img src="" alt="Resized selected Image">
+            <div class="component" id="modal">
+                <img :src="url" alt="Resized selected Image">
+                <h2>{{ title }}</h2>
+                <h3>By {{ username }}</h3>
+                <p>{{ description}}</p>
+                <p>{{ timestamp }}</p>
                 <h2 @click="closeModal">Close Me</h2>
             </div>
         </script>
