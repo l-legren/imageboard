@@ -7,39 +7,43 @@
 
     <body>
         <div class="navigation-bar">
-            <img id="logo" src="/images/logo.png" alt="Icon of nav-bar" />
+            <!-- <img id="logo" src="/images/logo.png" alt="Icon of nav-bar" /> -->
             <h2>PHOTOFY</h2>
         </div>
-        <h2>Choose your image</h2>
         <div id="uploader">
+            <h2>WHAT'S THE NEXT PIECE OF ART BEING FORGOTTEN ON YOUR HARD-DRIVE?</h2>
             <form action="/upload" method="post" enctype="multipart/form-data">
                 <!-- need two ways BINDING HERE with v-model!!! v-bind only one way! -->
-                <input
-                    name="title"
-                    type="text"
-                    placeholder="Title"
-                    v-model="title"
-                />
-                <input
-                    name="description"
-                    type="text"
-                    placeholder="Description"
-                    v-model="description"
-                />
-                <input
-                    name="username"
-                    type="text"
-                    placeholder="User Name"
-                    v-model="username"
-                />
+                <div id="info-field">
+                    <input
+                        name="title"
+                        type="text"
+                        placeholder="Title"
+                        v-model="title"
+                    />
+                    <input
+                        name="description"
+                        type="text"
+                        placeholder="Description"
+                        v-model="description"
+                    />
+                    <input
+                        name="username"
+                        type="text"
+                        placeholder="User Name"
+                        v-model="username"
+                    />
+                </div>
                 <!-- v-model doesn't work here, I need event handler on change -->
-                <input
-                    type="file"
-                    name="image"
-                    accept="image/*"
-                    @change="handleFileChange"
-                />
-                <input type="submit" value="Upload!" @click="upload" />
+                <div id="upload-field">
+                    <input
+                        type="file"
+                        name="image"
+                        accept="image/*"
+                        @change="handleFileChange"
+                    />
+                    <input type="submit" value="Upload!" @click="upload" />
+                </div>
             </form>
         </div>
         <div class="container">
@@ -50,7 +54,7 @@
                         alt="Image in grid"
                         @click="showUp(image.id)"
                     />
-                    <p class="quote">{{ image.description }}</p>
+                    <p class="quote"><span>{{ image.description }}</span></p>
                 </div>
                 <my-component
                     v-if="idImage"
@@ -64,11 +68,13 @@
         <script id="template" type="text/x-template">
             <div class="component" id="modal">
                 <img id="modal-img" :src="url" alt="Resized selected Image">
-                <h2>{{ title }}</h2>
-                <h3>By {{ username }}</h3>
-                <p>{{ description}}</p>
-                <p>{{ timestamp }}</p>
-                <h2 @click="closeModal">Close Me</h2>
+                <div class="text-info">
+                    <h2>{{ title }}</h2>
+                    <h3>By {{ username }}</h3>
+                    <p>{{ description }}</p>
+                    <p>{{ timestamp }}</p>
+                </div>
+                <h2 @click="closeModal" id="close">&times;</h2>
             </div>
         </script>
 
