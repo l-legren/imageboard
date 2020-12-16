@@ -32,11 +32,11 @@ app.get("/images", (req, res) => {
     // We don't use render for this project
     getImage().then(({ rows }) => {
         res.json(rows);
-    });
+    }).catch((err) => console.log(err));
 });
 
 app.post("/upload", uploader.single("image"), upload, (req, res) => {
-    console.log("req.file: ", req.file);
+    // console.log("req.file: ", req.file);
     const { title, description, username } = req.body;
     const { filename } = req.file;
     const fullUrl = `${config.s3Url}${filename}`;

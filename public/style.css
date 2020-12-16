@@ -26,6 +26,12 @@ body {
     font-size: 40px;
 }
 
+#logo {
+    width: 60px;
+    height: 40px;
+    position: relative;
+}
+
 /* IMAGES */
 
 .container {
@@ -59,3 +65,11 @@ body {
     height: 250px;
     object-fit: cover;
 }
+
+/* MOBILE PHONES ONE CARD PER ROW! */
+
+@media only screen and (max-width: 600px) {
+    body {
+      
+    }
+  }

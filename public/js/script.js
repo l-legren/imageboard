@@ -1,25 +1,61 @@
 console.log("Sanity Check!");
 
+Vue.component("my-component", {
+    template: "#template",
+    props: ["imageClicked"],
+    data: function () {
+        return {
+            name: "Layla"
+        };
+    },
+    mounted: function () {
+        var self = this;
+        console.log("props: ", self);
+    },
+    methods: {
+        changeName: function () {
+            this.name = "Jasmine";
+        },
+        closeModal: function () {
+            console.log("closeModal is about to emit an event from the comp");
+            this.$emit("close");
+        }
+    }
+}) ;
+
+
 new Vue({
     el: "#main",
     data: {
         name: "Jasmine",
-        cards: [],
+        images: [],
+        idImage: null, 
     },
     mounted: function () {
         var self = this;
         axios
             .get("/images")
-            .then(function (response) {
-                // console.log("response: ", response);
-                // console.log("this inside then: ", self);
-                self.cards = response.data;
+            .then(function ({ data }) {
+                // console.log("data: ", data);
+                for (let i = 0; i < data.length; i++) {
+                    self.images.unshift(data[i]);
+                    console.log(self.images);
+                }
             })
             .catch(function (error) {
                 console.log("error: ", error);
             });
     },
-    methods: null
+    methods: {
+        showUp: function (id) {
+            // console.log(id);
+            this.idImage = id;
+            // console.log(this.idImage);
+        },
+        closeMe: function () {
+            console.log("closeMe in Parent is running!");
+        }
+    }
 });
 
 new Vue({
