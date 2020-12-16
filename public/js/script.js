@@ -42,7 +42,8 @@
         data: {
             name: "Jasmine",
             images: [],
-            idImage: null, 
+            idImage: null,
+            modal: null
         },
         mounted: function () {
             var self = this;
@@ -64,9 +65,11 @@
                 // console.log(id);
                 this.idImage = id;
                 console.log("this.idImage: ", this.idImage);
+
             },
             closeMe: function () {
                 console.log("closeMe in Parent is running!");
+                this.idImage = null;
             }
         }
     });
