@@ -1,6 +1,31 @@
 (function () {
-    console.log("Sanity Check!");
-    
+
+    Vue.component("comments-component", {
+        template: "#comments-template",
+        props: ["id"],
+        data: function () {
+            return {
+                comment: "",
+                username: "",
+            };
+        },
+        methods: {
+            commentUpload: function(e) {
+                e.preventDefault();
+                axios.post("/upload-comments", this).then((res) => {
+                    console.log(res);
+                });
+            },
+            showComments: function() {
+                console.log("showComments is linked on submit!");
+            }
+        },
+        mounted: function () {
+            var self = this;
+
+        }
+    });
+
     Vue.component("my-component", {
         template: "#template",
         props: ["id"],
@@ -18,7 +43,7 @@
             // console.log("props: ", this.id);
             axios.get("/image-selected/" + this.id)
                 .then(({ data }) => {
-                    console.log(data[0]);
+                    // console.log(data[0]);
                     self.url = data[0].url;
                     self.username = data[0].username;
                     self.title = data[0].title;
@@ -40,7 +65,6 @@
     new Vue({
         el: "#main",
         data: {
-            name: "Jasmine",
             images: [],
             idImage: null,
             modal: null
@@ -53,7 +77,7 @@
                     // console.log("data: ", data);
                     for (let i = 0; i < data.length; i++) {
                         self.images.unshift(data[i]);
-                        console.log(self.images);
+                        // console.log(self.images);
                     }
                 })
                 .catch(function (error) {

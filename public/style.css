@@ -169,6 +169,13 @@ h2 {
     to {transform:scale(1)}
   }
 
+/* COMMENTS */
+
+#comments-container {
+    z-index: 1;
+}
+
+
 /* MOBILE PHONES ONE CARD PER ROW! */
 
 @media only screen and (max-width: 600px) {

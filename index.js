@@ -62,4 +62,9 @@ app.post("/upload", uploader.single("image"), upload, (req, res) => {
     }
 });
 
+app.post("/upload-comments", (req, res) => {
+    console.log(req.body);
+    // const { comment, username } = req.body;
+});
+
 app.listen(8080, () => console.log("Server listening on Port 8080...."));

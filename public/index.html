@@ -61,10 +61,14 @@
                     :id="idImage"
                     @close="closeMe"
                 ></my-component>
+                <comments-component
+                    v-if="idImage"
+                    :id="idImage"
+                ></comments-component>
             </div>
         </div>
 
-        <!-- HERE THE CODE OF MY COMPONENT -->
+        <!-- MY MODAL COMPONENT -->
         <script id="template" type="text/x-template">
             <div class="component" id="modal">
                 <img id="modal-img" :src="url" alt="Resized selected Image">
@@ -75,6 +79,19 @@
                     <p>{{ timestamp }}</p>
                 </div>
                 <h2 @click="closeModal" id="close">&times;</h2>
+            </div>
+        </script>
+        <!-- MY COMMENTS COMPONENT -->
+        <script id="comments-template" type="text/x-template">
+            <div id="comments-container">
+                <h2>Add your comment!</h2>
+                <p>Be nice and respectful 😉</p>
+                <div id="comments-inputs">
+                    <input type="text" name="comment" placeholder="Comment here..." v-model="comment">
+                    <input type="text" name="username" placeholder="Your Username here" v-model="username">
+                    <input type="hidden" name="imageId" :value="id">
+                    <input type="submit" value="Post your comment!" @click="commentUpload">
+                </div>
             </div>
         </script>
 

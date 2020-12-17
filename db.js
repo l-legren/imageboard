@@ -6,7 +6,7 @@ const db = spicedPg(
 
 // SELECTING
 
-module.exports.getImage = () => {
+exports.getImage = () => {
     const q = `SELECT * 
     FROM images`;
 
@@ -30,4 +30,13 @@ exports.insertImage = (url, username, title, description) => {
     const params = [url, username, title, description];
 
     return db.query(q, params);
-}
+};
+
+exports.insertComment = (comment, username, imageId) => {
+    const q = 
+        `INSERT INTO comments (comment, username, imageId)
+        VALUES ($1, $2, $3)`;
+    const params = [comment, username, imageId];
+
+    return db.query(q, params);
+};
