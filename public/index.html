@@ -59,12 +59,12 @@
                 <my-component
                     v-if="idImage"
                     :id="idImage"
-                    @close="closeMe"
-                    ></my-component>
+                    @close="closeMe">
                     <comments-component
                         v-if="idImage"
                         :id="idImage"
                     ></comments-component>
+                </my-component>
             </div>
         </div>
 
@@ -79,6 +79,7 @@
                     <p>{{ timestamp }}</p>
                 </div>
                 <h2 @click="closeModal" id="close">&times;</h2>
+                <slot></slot>
             </div>
         </script>
         <!-- MY COMMENTS COMPONENT -->
