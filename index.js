@@ -1,5 +1,5 @@
 const express = require("express");
-const { getImage, getImageWithId, insertImage } = require("./db");
+const { getImages, getImageWithId, insertImage, insertComment, getComments } = require("./db");
 const app = express();
 const { upload } = require("./s3.js");
 const multer = require("multer");
@@ -25,11 +25,13 @@ const uploader = multer({
     }
 });
 
+app.use(express.json());
+
 app.use(express.static("public"));
 
 app.get("/images", (req, res) => {
     // We don't use render for this project
-    getImage().then(({ rows }) => {
+    getImages().then(({ rows }) => {
         res.json(rows);
     }).catch((err) => console.log(err));
 });
@@ -63,8 +65,20 @@ app.post("/upload", uploader.single("image"), upload, (req, res) => {
 });
 
 app.post("/upload-comments", (req, res) => {
-    console.log(req.body);
-    // const { comment, username } = req.body;
+    // console.log(req.body);
+    const { comment, username, imageId } = req.body;
+    insertComment(comment, username, imageId)
+        .then((result) => console.log("Comment inserted!"))
+        .catch((err) => console.log("Error inserting comment: ", err));
+});
+
+app.get("/comments/:imageid", (req, res) => {
+    // console.log(req.params);
+    const { imageid } = req.params;
+    getComments(imageid).then(({rows}) => {
+        console.log("Res sent to the frontend: ", rows);
+        res.json(rows);
+    });
 });
 
 app.listen(8080, () => console.log("Server listening on Port 8080...."));

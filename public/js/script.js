@@ -5,24 +5,36 @@
         props: ["id"],
         data: function () {
             return {
+                comments: [],
                 comment: "",
                 username: "",
+                imageId: this.id
             };
         },
         methods: {
             commentUpload: function(e) {
                 e.preventDefault();
-                axios.post("/upload-comments", this).then((res) => {
+
+                let obj = {
+                    comment: this.comment,
+                    username: this.username,
+                    imageId: this.imageId
+                };
+                // console.log(this);
+                axios.post("/upload-comments",obj).then((res) => {
                     console.log(res);
                 });
-            },
-            showComments: function() {
-                console.log("showComments is linked on submit!");
             }
         },
         mounted: function () {
             var self = this;
-
+            axios.get("/comments/" + self.imageId)
+                .then(({data}) => {
+                    console.log(data);
+                    for (let i = 0; i < data.length; i++) {
+                        self.comments.push(data[i]);
+                    }
+                }).catch((err) => console.log("Error retrieving comments"));
         }
     });
 
@@ -40,7 +52,6 @@
         },
         mounted: function () {
             var self = this;
-            // console.log("props: ", this.id);
             axios.get("/image-selected/" + this.id)
                 .then(({ data }) => {
                     // console.log(data[0]);
@@ -51,9 +62,6 @@
                 });
         },
         methods: {
-            changeName: function () {
-                this.name = "Jasmine";
-            },
             closeModal: function () {
                 console.log("closeModal is about to emit an event from the comp");
                 this.$emit("close");

@@ -6,9 +6,10 @@ const db = spicedPg(
 
 // SELECTING
 
-exports.getImage = () => {
+exports.getImages = () => {
     const q = `SELECT * 
-    FROM images`;
+    FROM images
+    LIMIT 9`;
 
     return db.query(q);
 };
@@ -17,6 +18,17 @@ exports.getImageWithId = (id) => {
     const q = `SELECT *
     FROM images
     WHERE id=($1)`;
+    const params = [id];
+
+    return db.query(q, params);
+};
+
+exports.getComments = (id) => {
+    const q = 
+        `SELECT *
+        FROM comments
+        WHERE image_id = ($1)
+        LIMIT 3`;
     const params = [id];
 
     return db.query(q, params);
@@ -34,7 +46,7 @@ exports.insertImage = (url, username, title, description) => {
 
 exports.insertComment = (comment, username, imageId) => {
     const q = 
-        `INSERT INTO comments (comment, username, imageId)
+        `INSERT INTO comments (comment, username, image_id)
         VALUES ($1, $2, $3)`;
     const params = [comment, username, imageId];
 
