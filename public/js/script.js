@@ -75,7 +75,8 @@
         data: {
             images: [],
             idImage: null,
-            modal: null
+            modal: null,
+            lastId: null,
         },
         mounted: function () {
             var self = this;
@@ -102,6 +103,11 @@
             closeMe: function () {
                 console.log("closeMe in Parent is running!");
                 this.idImage = null;
+            },
+            loadMore: function () {
+                console.log("loadMore is running");
+                let lastImageId = this.images[this.images.length - 1].id;
+                console.log(lastImageId);
             }
         }
     });

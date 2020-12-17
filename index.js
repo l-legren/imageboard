@@ -76,7 +76,7 @@ app.get("/comments/:imageid", (req, res) => {
     // console.log(req.params);
     const { imageid } = req.params;
     getComments(imageid).then(({rows}) => {
-        console.log("Res sent to the frontend: ", rows);
+        // console.log("Res sent to the frontend: ", rows);
         res.json(rows);
     });
 });
