@@ -52,12 +52,13 @@
         <div class="container">
             <div id="main">
                 <div v-for="image in images" class="card">
-                    <img
-                        :src="image.url"
-                        alt="Image in grid"
-                        @click="showUp(image.id)"
-                    />
-                    <p class="quote"><span>{{ image.description }}</span></p>
+                    <a :href="'#' + image.id">
+                        <img
+                            :src="image.url"
+                            alt="Image in grid"
+                        />
+                        <p class="quote"><span>{{ image.description }}</span></p>
+                    </a>
                 </div>
                 <input id="more" type="submit" value="More" @click="loadMore">
                 <my-component

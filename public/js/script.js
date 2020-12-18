@@ -35,6 +35,16 @@
                         self.comments.push(data[i]);
                     }
                 }).catch((err) => console.log("Error retrieving comments"));
+        },
+        watch: function () {
+            var self = this;
+            axios.get("/comments/" + self.imageId)
+                .then(({data}) => {
+                    console.log(data);
+                    for (let i = 0; i < data.length; i++) {
+                        self.comments.push(data[i]);
+                    }
+                }).catch((err) => console.log("Error retrieving comments"));
         }
     });
 
@@ -61,10 +71,34 @@
                     self.timestamp = data[0].created_at;
                 });
         },
+        watch: {
+            function () {
+                var self = this;
+                axios.get("/image-selected/" + this.id)
+                    .then(({ data }) => {
+                        // console.log(data[0]);
+                        self.url = data[0].url;
+                        self.username = data[0].username;
+                        self.title = data[0].title;
+                        self.timestamp = data[0].created_at;
+                    });
+            }
+        },
         methods: {
             closeModal: function () {
                 console.log("closeModal is about to emit an event from the comp");
                 this.$emit("close");
+            },
+            mountedComponent: function () {
+                var self = this;
+                axios.get("/image-selected/" + this.id)
+                    .then(({ data }) => {
+                        // console.log(data[0]);
+                        self.url = data[0].url;
+                        self.username = data[0].username;
+                        self.title = data[0].title;
+                        self.timestamp = data[0].created_at;
+                    });
             }
         }
     }) ;
@@ -74,7 +108,7 @@
         el: "#main",
         data: {
             images: [],
-            idImage: null,
+            idImage: location.hash.slice(1),
             modal: null,
             lastId: null,
         },
@@ -92,17 +126,16 @@
                 .catch(function (error) {
                     console.log("error: ", error);
                 });
+            addEventListener("hashchange", function (e) {
+                console.log("Hash changed!: ", this.idImage);
+                self.idImage = location.hash.slice(1);
+            });
         },
         methods: {
-            // MAKES THE SELECTED IMAGE MODAL SHOW UP
-            showUp: function (id) {
-                // console.log(id);
-                this.idImage = id;
-                console.log("this.idImage: ", this.idImage);
-            },
             closeMe: function () {
                 console.log("closeMe in Parent is running!");
                 this.idImage = null;
+                history.pushState({}, "", "/");
             },
             loadMore: function () {
                 console.log("loadMore is running, how many Images do we have?: ", this.images.length);
