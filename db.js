@@ -25,7 +25,7 @@ exports.getMoreImages = (lastId) => {
         ) AS "lowestId" FROM images
         WHERE id < $1
         ORDER BY id DESC
-        LIMIT 10;`;
+        LIMIT 9`;
     const params = [lastId];
 
     return db.query(q, params);

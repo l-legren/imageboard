@@ -20,18 +20,21 @@
                         type="text"
                         placeholder="Title"
                         v-model="title"
+                        required
                     />
                     <input
                         name="description"
                         type="text"
                         placeholder="Description"
                         v-model="description"
+                        required
                     />
                     <input
                         name="username"
                         type="text"
                         placeholder="User Name"
                         v-model="username"
+                        required
                     />
                 </div>
                 <!-- v-model doesn't work here, I need event handler on change -->
@@ -56,7 +59,7 @@
                     />
                     <p class="quote"><span>{{ image.description }}</span></p>
                 </div>
-                <input type="submit" value="More" @click="loadMore">
+                <input id="more" type="submit" value="More" @click="loadMore">
                 <my-component
                     v-if="idImage"
                     :id="idImage"
@@ -89,8 +92,8 @@
                 <h2>Add your comment!</h2>
                 <p>Be nice and respectful 😉</p>
                 <div id="comments-inputs">
-                    <input type="text" name="comment" placeholder="Comment here..." v-model="comment">
-                    <input type="text" name="username" placeholder="Your Username here" v-model="username">
+                    <input type="text" name="comment" placeholder="Comment here..." v-model="comment" required>
+                    <input type="text" name="username" placeholder="Your Username here" v-model="username" required>
                     <input type="submit" value="Post your comment!" @click="commentUpload">
                 </div>
                 <div v-for="comment in comments" id="comments-stored">

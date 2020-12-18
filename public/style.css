@@ -66,6 +66,7 @@ h2 {
 .container {
     display: grid;
     grid-template-columns: 0.5fr repeat(3, 2fr) 0.5fr;
+    /* grid-template-rows: 90% 10%; */
     width: 95%;
     height: 100%;
     margin-top: 50px;
@@ -82,10 +83,8 @@ h2 {
 }
 
 .card {
-    /* border: 3px solid black; */
     width: 400px;
     height: 300px;
-    /* grid-column: span 1; */
     border-radius: 0;
 }
 
@@ -110,6 +109,10 @@ h2 {
     padding: 10px;
     border-radius: 2px;
     text-align: right;
+}
+
+#more {
+    display: block;
 }
 
 /* MODAL */

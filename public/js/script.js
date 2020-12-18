@@ -94,20 +94,32 @@
                 });
         },
         methods: {
+            // MAKES THE SELECTED IMAGE MODAL SHOW UP
             showUp: function (id) {
                 // console.log(id);
                 this.idImage = id;
                 console.log("this.idImage: ", this.idImage);
-
             },
             closeMe: function () {
                 console.log("closeMe in Parent is running!");
                 this.idImage = null;
             },
             loadMore: function () {
-                console.log("loadMore is running");
+                console.log("loadMore is running, how many Images do we have?: ", this.images.length);
+                // HERE I AM GETTING THE LAST IMAGE IN THE IMAGES ARRAY
                 let lastImageId = this.images[this.images.length - 1].id;
-                console.log(lastImageId);
+                console.log("ID last Image: ", lastImageId);
+                var self = this;
+                axios
+                    .get("/more-images/" + lastImageId) // DO NOT FORGET SLASH IN THE ROUTE AND SLASH IN THE END IF NEED PARAMETERS
+                    .then(function ({ data }) {
+                        console.log("This is me the front side retrieving more images: ",data);
+                        // HERE I AM PUSHING THE NEW IMAGES TO THE ARRAY, UNSHIFT ONLY WHILE UPLOADING NEW ONES
+                        for (let i = 0; i < data.length; i++) {
+                            self.images.push(data[i]);
+                        }
+                    })
+                    .catch((err) => console.log("ERROR retrieving more Images", err));
             }
         }
     });
