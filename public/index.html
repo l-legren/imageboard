@@ -39,12 +39,15 @@
                 </div>
                 <!-- v-model doesn't work here, I need event handler on change -->
                 <div id="upload-field">
-                    <input
-                        type="file"
-                        name="image"
-                        accept="image/*"
-                        @change="handleFileChange"
-                    />
+                    <label class="file">
+                        <input
+                            id="upload-button"
+                            type="file"
+                            name="image"
+                            accept="image/*"
+                            @change="handleFileChange"
+                        />
+                    </label>
                     <input type="submit" value="Upload!" @click="upload" />
                 </div>
             </form>
