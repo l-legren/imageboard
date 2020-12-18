@@ -64,7 +64,8 @@ exports.insertImage = (url, username, title, description) => {
 exports.insertComment = (comment, username, imageId) => {
     const q = 
         `INSERT INTO comments (comment, username, image_id)
-        VALUES ($1, $2, $3)`;
+        VALUES ($1, $2, $3)
+        RETURNING *`;
     const params = [comment, username, imageId];
 
     return db.query(q, params);

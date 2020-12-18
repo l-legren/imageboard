@@ -81,7 +81,10 @@ app.post("/upload-comments", (req, res) => {
     // console.log(req.body);
     const { comment, username, imageId } = req.body;
     insertComment(comment, username, imageId)
-        .then(() => console.log("Comment inserted!"))
+        .then(({rows}) => {
+            console.log("Comment inserted and sending it to frontend!: ", rows);
+            res.json(rows);
+        })
         .catch((err) => console.log("Error inserting comment: ", err));
 });
 

@@ -14,15 +14,17 @@
         methods: {
             commentUpload: function(e) {
                 e.preventDefault();
-
+                var self = this;
                 let obj = {
                     comment: this.comment,
                     username: this.username,
                     imageId: this.imageId
                 };
                 // console.log(this);
-                axios.post("/upload-comments",obj).then((res) => {
-                    console.log(res);
+                axios.post("/upload-comments",obj).then(({data}) => {
+                    console.log("Res: ", data);
+                    console.log(self);
+                    self.comments.unshift(data[0]);
                 });
             },
             mounted: function () {
@@ -36,10 +38,10 @@
         mounted: function mounted () {
             this.mounted();
         },
-        watch: {
-            id: function mounted () {
-                this.mounted();
-            }}
+        // watch: {
+        //     id: function mounted () {
+        //         this.mounted();
+        //     }}
     });
 
     Vue.component("my-component", {
