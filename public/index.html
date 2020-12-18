@@ -60,7 +60,7 @@
                         <p class="quote"><span>{{ image.description }}</span></p>
                     </a>
                 </div>
-                <input id="more" type="submit" value="More" @click="loadMore">
+                <input v-if="moreButton" id="more" type="submit" value="More" @click="loadMore">
                 <my-component
                     v-if="idImage"
                     :id="idImage"

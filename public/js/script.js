@@ -24,28 +24,22 @@
                 axios.post("/upload-comments",obj).then((res) => {
                     console.log(res);
                 });
-            }
+            },
+            mounted: function () {
+                var self = this;
+                axios.get("/comments/" + self.imageId)
+                    .then(({data}) => {
+                        console.log(data);
+                        self.comments = data;
+                    }).catch((err) => console.log("Error retrieving comments"));
+            }},
+        mounted: function mounted () {
+            this.mounted();
         },
-        mounted: function () {
-            var self = this;
-            axios.get("/comments/" + self.imageId)
-                .then(({data}) => {
-                    console.log(data);
-                    for (let i = 0; i < data.length; i++) {
-                        self.comments.push(data[i]);
-                    }
-                }).catch((err) => console.log("Error retrieving comments"));
-        },
-        watch: function () {
-            var self = this;
-            axios.get("/comments/" + self.imageId)
-                .then(({data}) => {
-                    console.log(data);
-                    for (let i = 0; i < data.length; i++) {
-                        self.comments.push(data[i]);
-                    }
-                }).catch((err) => console.log("Error retrieving comments"));
-        }
+        watch: {
+            id: function mounted () {
+                this.mounted();
+            }}
     });
 
     Vue.component("my-component", {
@@ -61,27 +55,11 @@
             };
         },
         mounted: function () {
-            var self = this;
-            axios.get("/image-selected/" + this.id)
-                .then(({ data }) => {
-                    // console.log(data[0]);
-                    self.url = data[0].url;
-                    self.username = data[0].username;
-                    self.title = data[0].title;
-                    self.timestamp = data[0].created_at;
-                });
+            this.mounted();
         },
         watch: {
-            function () {
-                var self = this;
-                axios.get("/image-selected/" + this.id)
-                    .then(({ data }) => {
-                        // console.log(data[0]);
-                        self.url = data[0].url;
-                        self.username = data[0].username;
-                        self.title = data[0].title;
-                        self.timestamp = data[0].created_at;
-                    });
+            id: function () {
+                this.mounted();
             }
         },
         methods: {
@@ -89,7 +67,7 @@
                 console.log("closeModal is about to emit an event from the comp");
                 this.$emit("close");
             },
-            mountedComponent: function () {
+            mounted: function () {
                 var self = this;
                 axios.get("/image-selected/" + this.id)
                     .then(({ data }) => {
@@ -97,6 +75,7 @@
                         self.url = data[0].url;
                         self.username = data[0].username;
                         self.title = data[0].title;
+                        self.description = data[0].description;
                         self.timestamp = data[0].created_at;
                     });
             }
@@ -111,6 +90,7 @@
             idImage: location.hash.slice(1),
             modal: null,
             lastId: null,
+            moreButton: true
         },
         mounted: function () {
             var self = this;
@@ -149,6 +129,10 @@
                         console.log("This is me the front side retrieving more images: ",data);
                         // HERE I AM PUSHING THE NEW IMAGES TO THE ARRAY, UNSHIFT ONLY WHILE UPLOADING NEW ONES
                         for (let i = 0; i < data.length; i++) {
+                            // THE LAST IMAGE TO RETRIEVE IS THE ONE WITH INDEX 1 BECAUSE I AM UNSHIFTING THE IMAGES!!!
+                            if (data[i].id == 1) {
+                                self.moreButton = null;
+                            }
                             self.images.push(data[i]);
                         }
                     })
