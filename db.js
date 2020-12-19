@@ -18,7 +18,7 @@ exports.getImages = () => {
 
 exports.getMoreImages = (lastId) => {
     const q =
-        ` SELECT url, title, id, (
+        `SELECT url, title, id, description, (
             SELECT id FROM images
             ORDER BY id ASC
             LIMIT 1
@@ -34,7 +34,7 @@ exports.getMoreImages = (lastId) => {
 exports.getImageWithId = (id) => {
     const q = `SELECT *
     FROM images
-    WHERE id=($1)`;
+    WHERE id=($1) OR id=($1 -1) OR id=($1 +1) `;
     const params = [id];
 
     return db.query(q, params);

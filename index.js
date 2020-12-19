@@ -50,7 +50,7 @@ app.get("/image-selected/:imageurl", (req, res) => {
     // console.log(req.params.imageurl);
     getImageWithId(imageurl)
         .then(({ rows }) => {
-            // console.log(rows);
+            console.log("rows to FE:", rows);
             res.json(rows);
         })
         .catch((err) => console.log(err));

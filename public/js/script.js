@@ -25,13 +25,15 @@
                     console.log("Res: ", data);
                     console.log(self);
                     self.comments.unshift(data[0]);
+                    self.comment = "";
+                    self.username = "";
                 });
             },
             mounted: function () {
                 var self = this;
                 axios.get("/comments/" + self.imageId)
                     .then(({data}) => {
-                        console.log(data);
+                        // console.log(data);
                         self.comments = data;
                     }).catch((err) => console.log("Error retrieving comments"));
             }},
@@ -49,7 +51,9 @@
                 username: "",
                 title: "",
                 description: "",
-                timestamp: ""
+                timestamp: "",
+                prevImage: null,
+                nextImage: null
             };
         },
         mounted: function () {
@@ -69,12 +73,14 @@
                 var self = this;
                 axios.get("/image-selected/" + this.id)
                     .then(({ data }) => {
-                        // console.log(data[0]);
-                        self.url = data[0].url;
-                        self.username = data[0].username;
-                        self.title = data[0].title;
-                        self.description = data[0].description;
-                        self.timestamp = data[0].created_at;
+                        console.log(data[0]);
+                        self.url = data[1].url;
+                        self.username = data[1].username;
+                        self.title = data[1].title;
+                        self.description = data[1].description;
+                        self.timestamp = data[1].created_at;
+                        self.prevImage = data[0];
+                        self.nextImage = data[2];
                     });
             }
         }
@@ -97,15 +103,16 @@
                 .then(function ({ data }) {
                     // console.log("data: ", data);
                     for (let i = 0; i < data.length; i++) {
-                        self.images.unshift(data[i]);
-                        // console.log(self.images);
+                        self.images.push(data[i]);
+                        // console.log("This is me the front end getting images when mounting: ", self.images);
                     }
+                    console.log("Images mounted: ", self.images);
                 })
                 .catch(function (error) {
                     console.log("error: ", error);
                 });
             addEventListener("hashchange", function (e) {
-                console.log("Hash changed!: ", this.idImage);
+                console.log("Hash changed to this id!: ", this.idImage);
                 self.idImage = location.hash.slice(1);
             });
         },
