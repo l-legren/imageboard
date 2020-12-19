@@ -9,71 +9,77 @@
         <div class="navigation-bar">
             <!-- <img id="logo" src="/images/logo.png" alt="Icon of nav-bar" /> -->
             <h2>PHOTOFY</h2>
+            <p>The world's leading image uploading plattform</p>
         </div>
-        <div id="uploader">
-            <h2>WHAT'S THE NEXT PIECE OF ART BEING FORGOTTEN ON YOUR HARD-DRIVE?</h2>
-            <form action="/upload" method="post" enctype="multipart/form-data">
-                <!-- need two ways BINDING HERE with v-model!!! v-bind only one way! -->
-                <div id="info-field">
-                    <input
-                        name="title"
-                        type="text"
-                        placeholder="Title"
-                        v-model="title"
-                        required
-                    />
-                    <input
-                        name="description"
-                        type="text"
-                        placeholder="Description"
-                        v-model="description"
-                        required
-                    />
-                    <input
-                        name="username"
-                        type="text"
-                        placeholder="User Name"
-                        v-model="username"
-                        required
-                    />
-                </div>
-                <!-- v-model doesn't work here, I need event handler on change -->
-                <div id="upload-field">
-                    <label class="file">
+        <div class="container-uploader">
+            <div id="uploader">
+                <h2>WHAT'S THE NEXT PIECE OF ART BEING FORGOTTEN ON YOUR HARD-DRIVE?</h2>
+                <form action="/upload" method="post" enctype="multipart/form-data">
+                    <!-- need two ways BINDING HERE with v-model!!! v-bind only one way! -->
+                    <div id="info-field">
                         <input
-                            id="upload-button"
+                            name="title"
+                            type="text"
+                            placeholder="Title"
+                            v-model="title"
+                            required
+                        />
+                        <input
+                            name="description"
+                            type="text"
+                            placeholder="Description"
+                            v-model="description"
+                            required
+                        />
+                        <input
+                            name="username"
+                            type="text"
+                            placeholder="User Name"
+                            v-model="username"
+                            required
+                        />
+                    </div>
+                    <!-- v-model doesn't work here, I need event handler on change -->
+                    <div id="upload-field">
+                        <input
+                            id="file-button"
                             type="file"
                             name="image"
                             accept="image/*"
                             @change="handleFileChange"
                         />
-                    </label>
-                    <input type="submit" value="Upload!" @click="upload" />
-                </div>
-            </form>
+                        <input class="button" type="submit" value="Upload!" @click="upload" />
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="container">
-            <div id="main">
-                <div v-for="image in images" class="card">
-                    <a :href="'#' + image.id">
-                        <img
-                            :src="image.url"
-                            alt="Image in grid"
-                        />
-                        <p class="quote"><span>{{ image.description }}</span></p>
-                    </a>
+        <div id="main">
+            <div id="imageboard-button">
+                <div class="imageboard">
+                    <div v-for="image in images" class="card">
+                        <a :href="'#' + image.id">
+                            <img
+                                :src="image.url"
+                                alt="Image in grid"
+                            />
+                            <p class="quote"><span>{{ image.description }}</span></p>
+                        </a>
+                    </div>
                 </div>
-                <input v-if="moreButton" id="more" type="submit" value="More" @click="loadMore">
-                <my-component
+            </div>
+            <input v-if="moreButton" class="button" id="more" type="submit" value="More" @click="loadMore">
+            <my-component
+                v-if="idImage"
+                :id="idImage"
+                @close="closeMe">
+                <comments-component
                     v-if="idImage"
                     :id="idImage"
-                    @close="closeMe">
-                    <comments-component
-                        v-if="idImage"
-                        :id="idImage"
-                    ></comments-component>
-                </my-component>
-            </div>
+                ></comments-component>
+            </my-component>
+        </div>
+        <div class="footer">
+            <p>PHOTOFY 2020. All Rights Reserved ©. Made with ❤ by Leret</p>
         </div>
 
         <!-- MY MODAL COMPONENT -->

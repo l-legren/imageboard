@@ -37,11 +37,7 @@
             }},
         mounted: function mounted () {
             this.mounted();
-        },
-        // watch: {
-        //     id: function mounted () {
-        //         this.mounted();
-        //     }}
+        }
     });
 
     Vue.component("my-component", {
@@ -149,7 +145,7 @@
             title: "",
             description: "",
             username: "",
-            image: null
+            image: null,
         },
         methods: {
             handleFileChange: function(e) {
