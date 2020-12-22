@@ -47,11 +47,7 @@
         props: ["id"],
         data: function () {
             return {
-                url: "",
-                username: "",
-                title: "",
-                description: "",
-                timestamp: "",
+                currImage: null,
                 prevImage: null,
                 nextImage: null
             };
@@ -73,14 +69,30 @@
                 var self = this;
                 axios.get("/image-selected/" + this.id)
                     .then(({ data }) => {
-                        console.log(data[0]);
-                        self.url = data[1].url;
-                        self.username = data[1].username;
-                        self.title = data[1].title;
-                        self.description = data[1].description;
-                        self.timestamp = data[1].created_at;
-                        self.prevImage = data[0];
-                        self.nextImage = data[2];
+                        console.log("Data from server: ", data);
+                        if (data.length == 3) {
+                            self.prevImage = data[2];
+                            self.currImage = data[1];
+                            self.nextImage = data[0];
+                            console.log("Prev: ", self.prevImage);
+                            console.log("Curr: ", self.currImage);
+                            console.log("Next: ", self.nextImage);
+                        } else {
+                            for (let i = 0; i < data.length; i++) {
+                                if (data[0].id == 1) {
+                                    self.prevImage = data[1];
+                                    self.currImage = data[0];
+                                    self.nextImage = null;
+                                    console.log(self.currImage);
+                                // NEXT IMG LOWER ID, PREV HIGHER ID
+                                } else {
+                                    self.prevImage = null;
+                                    self.currImage = data[1];
+                                    self.nextImage = data[0];
+                                    console.log(self.currImage);
+                                }
+                            }
+                        }
                     });
             }
         }

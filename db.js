@@ -34,7 +34,9 @@ exports.getMoreImages = (lastId) => {
 exports.getImageWithId = (id) => {
     const q = `SELECT *
     FROM images
-    WHERE id=($1) OR id=($1 -1) OR id=($1 +1) `;
+    WHERE id = (SELECT MIN(id) FROM images WHERE id > $1)
+    OR id = (SELECT MAX(id) FROM images WHERE id < $1) 
+    OR id=($1)`;
     const params = [id];
 
     return db.query(q, params);

@@ -54,7 +54,7 @@
             </div>
         </div>
         <div id="main">
-            <div id="imageboard-button">
+            <div class="imageboard-container">
                 <div class="imageboard">
                     <div v-for="image in images" class="card">
                         <a :href="'#' + image.id">
@@ -71,7 +71,8 @@
             <my-component
                 v-if="idImage"
                 :id="idImage"
-                @close="closeMe">
+                @close="closeMe"
+                >
                 <comments-component
                     v-if="idImage"
                     :id="idImage"
@@ -84,14 +85,21 @@
 
         <!-- MY MODAL COMPONENT -->
         <script id="template" type="text/x-template">
-            <div class="component" id="modal">
-                <img id="modal-img" :src="url" alt="Resized selected Image">
+            <div v-if="currImage" class="component" id="modal">
+                <img id="modal-img" :src="currImage.url" alt="Resized selected Image">
                 <div class="text-info">
-                    <h2>{{ title }}</h2>
-                    <h3>By {{ username }}</h3>
-                    <p>{{ description }}</p>
-                    <p>{{ timestamp }}</p>
+                    <h2>{{ currImage.title }}</h2>
+                    <h3>By {{ currImage.username }}</h3>
+                    <p>{{ currImage.description }}</p>
+                    <p>{{ currImage.timestamp }}</p>
                 </div>
+                <!-- SINCE IS IN ORDER DESCENDENT THE LOGIC WITH THE BUTTONS HERE IS THE WAY AROUND -->
+                <a v-if="nextImage" :href="'#' + nextImage.id">
+                    <div class="next-prev" id="previous">></div>
+                </a>
+                <a v-if="prevImage" :href="'#' + prevImage.id">
+                    <div class="next-prev" id="next"><</div>
+                </a>
                 <h2 @click="closeModal" id="close">&times;</h2>
                 <slot></slot>
             </div>
@@ -104,11 +112,11 @@
                 <div id="comments-inputs">
                     <input type="text" name="comment" placeholder="Comment here..." v-model="comment" required>
                     <input type="text" name="username" placeholder="Your Username here" v-model="username" required>
-                    <input type="submit" value="Post your comment!" @click="commentUpload">
+                    <input id="submit-comment" type="submit" value="COMMENT!" @click="commentUpload">
                 </div>
                 <div v-for="comment in comments" id="comments-stored">
-                    <h2>{{comment.username}} said:</h2>
-                    <p>{{comment.comment}}</p>
+                    <h2 id="comment-user" >{{comment.username}} said:</h2>
+                    <p id="comment-comment">{{comment.comment}}</p>
                 </div>
             </div>
         </script>
