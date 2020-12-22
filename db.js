@@ -11,7 +11,6 @@ exports.getImages = () => {
     FROM images
     ORDER BY id DESC
     LIMIT 9`;
-    // const params = [lastId];
 
     return db.query(q);
 };
