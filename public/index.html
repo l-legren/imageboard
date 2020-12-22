@@ -95,10 +95,10 @@
                 </div>
                 <!-- SINCE IS IN ORDER DESCENDENT THE LOGIC WITH THE BUTTONS HERE IS THE WAY AROUND -->
                 <a v-if="nextImage" :href="'#' + nextImage.id">
-                    <div class="next-prev" id="previous">></div>
+                    <div class="next-prev" id="previous"><span>></span></div>
                 </a>
                 <a v-if="prevImage" :href="'#' + prevImage.id">
-                    <div class="next-prev" id="next"><</div>
+                    <div class="next-prev" id="next"><span><</span></div>
                 </a>
                 <h2 @click="closeModal" id="close">&times;</h2>
                 <slot></slot>

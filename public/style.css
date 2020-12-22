@@ -174,8 +174,8 @@ h2 {
 
 .imageboard-container {
     display: grid;
-    grid-template-columns: 0.5fr repeat(3, 2fr) 0.5fr;
-    width: 95%;
+    grid-template-columns: 0.5fr repeat(3, 400px) 0.5fr;
+    width: 100%;
     height: 100%;
     margin-top: 50px;
 }
@@ -198,8 +198,8 @@ h2 {
 }
 
 .card {
-    width: 100%;
-    height: 100%;
+    width: 400px;
+    height: 300px;
     border-radius: 0;
 }
 
@@ -245,8 +245,8 @@ h2 {
 #modal-img {
     margin: auto;
     display: block;
-    width: 70%;
-    height: 90%;
+    width: auto;
+    height: 80%;
 }
 
 .text-info {
@@ -275,13 +275,18 @@ h2 {
 
 .next-prev {
     position: absolute;
-    height: 100vh;
+    height: 100%;
     width: 100px;
     z-index: 5;
     font-size: 100px;
     color:white;
-    top: 40%;
+    /* top: 40%; */
     cursor: pointer;
+}
+
+.next-prev span {
+    position: relative;
+    top: -65%;
 }
 
 #previous {
@@ -289,7 +294,7 @@ h2 {
 }
 
 #next {
-    left: 5%;
+    left: 4%;
 }
 
 #modal-img,
@@ -366,44 +371,40 @@ h2 {
 
 /* MOBILE PHONES ONE CARD PER ROW! */
 
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 1250px) {
     .imageboard-container {
         display: grid;
-        grid-template-columns: 0.25fr repeat(2, 2fr) 0.25fr;
+        grid-template-columns: 0.25fr repeat(2, 400px) 0.25fr;
         /* grid-template-rows: 90% 10%; */
-        width: 95%;
-        height: 100%;
-        margin-top: 50px;
-        align-items: baseline;
     }
 
     .imageboard {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        grid-column: 2 / span 3;
-        gap: 5px;
-        align-content: space-around;
-        justify-items: center;
+        grid-column: 2 / span 2;
+        gap: 2px;
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 840px) {
     .imageboard-container {
         display: grid;
         grid-template-columns: 0.1fr 1fr 0.1fr;
         /* grid-template-rows: 90% 10%; */
-        width: 95%;
-        height: 100%;
-        margin-top: 50px;
-        align-items: baseline;
+    }
+
+    #info-field {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container-uploader {
+        height: 520px;
     }
 
     .imageboard {
         display: grid;
         grid-template-columns: 1fr;
-        grid-column: 2 / span 3;
-        gap: 5px;
-        align-content: space-around;
-        justify-items: center;
+        grid-column: 2;
     }
 }
