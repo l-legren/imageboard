@@ -39,6 +39,12 @@
             }},
         mounted: function mounted () {
             this.mounted();
+        },
+        watch: {
+            id: function () {
+                this.imageId = this.id;
+                this.mounted();
+            }
         }
     });
 
