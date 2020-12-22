@@ -106,4 +106,4 @@ app.get("/more-images/:lastimageid", (req, res) => {
     }).catch(() => console.log("Error uploading more images"));
 });
 
-app.listen(8080, () => console.log("Server listening on Port 8080...."));
+app.listen(process.env.PORT || 8080, () => console.log("Server listening on Port 8080...."));
