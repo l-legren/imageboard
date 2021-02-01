@@ -16,6 +16,7 @@ I found building this App very useful as my very first component-based project t
 - File Storing with AWS S3
 - Vue.js
 - Node/Express
+- PSQL
 
 ## SET UP
 
