@@ -19,4 +19,6 @@ I found building this App very useful as my very first component-based project t
 
 To make it run just clone the repository, install all the dependencies with ```npm install``` and in your local directory in the terminal run it with ```node ```.
 
+For security reasons you are going to need your own AWS account and create your own Bucket and pass your credentials so the uploading middleware works.
+
 ## SCREENSHOTS
