@@ -22,3 +22,5 @@ To make it run just clone the repository, install all the dependencies with ```n
 For security reasons you are going to need your own AWS account and create your own Bucket and pass your credentials so the uploading middleware works.
 
 ## SCREENSHOTS
+
+[Homepage screenshot](/public/screenshots/homepage.jpg)
