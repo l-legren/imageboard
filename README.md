@@ -23,4 +23,4 @@ For security reasons you are going to need your own AWS account and create your 
 
 ## SCREENSHOTS
 
-[Homepage screenshot](/public/screenshots/homepage.jpg)
+[Homepage screenshot](/images/screenshots/homepage.jpg)
