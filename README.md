@@ -17,9 +17,9 @@ I found building this App very useful as my very first component-based project t
 
 ## SET UP
 
+For security reasons you are going to need your own AWS account and create your own S3 Bucket and pass your credentials so the uploading middleware works.
+I addition to the AMW set up you will need to create a new PSQL Database and edit the ```db.js``` file that you can find in this repo.
 To make it run just clone the repository, install all the dependencies with ```npm install``` and in your local directory in the terminal run it with ```node .```.
-
-For security reasons you are going to need your own AWS account and create your own Bucket and pass your credentials so the uploading middleware works.
 
 ## SCREENSHOTS
 
