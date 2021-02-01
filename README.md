@@ -6,7 +6,7 @@ This app is a Imageborad built in Vue.js where the user can upload his pictures 
 
 ## WHY THIS?
 
-I found building this App very useful as my very first component-based project to get used and comfortable working with components and passing props between parent and children. It is also very useful to learn the concept of mounting within a component.
+I found building this App very useful as my very first component-based project to get used and comfortable working with components and passing props between parent and children. It was also very useful to learn the concept of mounting within a component.
 
 ## TECHNOLOGIES I USED
 
@@ -23,4 +23,11 @@ To make it run just clone the repository, install all the dependencies with ```n
 
 ## SCREENSHOTS
 
+### Homepage
 ![Homepage screenshot](https://github.com/l-legren/imageboard/blob/leret/public/images/screenshot/homepage.jpg)
+
+### Picture Modal
+![Photo Modal Screenshot](https://github.com/l-legren/imageboard/blob/leret/public/images/screenshot/pic_modal.jpg)
+
+### Comments section
+![Comments screenshot](https://github.com/l-legren/imageboard/blob/leret/public/images/screenshot/comments.jpg)
