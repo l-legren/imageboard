@@ -23,4 +23,4 @@ For security reasons you are going to need your own AWS account and create your 
 
 ## SCREENSHOTS
 
-[Homepage screenshot](/images/screenshots/homepage.jpg)
+[Homepage screenshot](https://github.com/l-legren/imageboard/blob/leret/public/images/screenshot/homepage.jpg)
