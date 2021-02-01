@@ -2,7 +2,8 @@
 
 ## WHAT'S THIS?
 
-This app is a Imageborad built in Vue.js where the user can upload his pictures to the App and will be displayed immediately after uploading. User can click on the pictures and a modal will show up to see the image resized. The user has the possibility of leaving a comment on the picture and navigate through the photos.
+This project was built during my attendance to the Spiced Academy's Web Development Bootcamp in Berlin.
+This app is a Imageborad built in Vue.js where the user can upload his pictures to the App and will be displayed immediately after uploading. User can click on the pictures and a modal will show up to see the image resized. The user has the possibility of leaving a comment on the picture and navigate through the pictures. It also accepts infinite scroll.
 
 ## WHY THIS?
 
