@@ -1,6 +1,6 @@
 # Imageboard
 
-# Code in leret branch
+## **Code in leret branch**
 
 ## What's this?
 
